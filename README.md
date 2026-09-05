@@ -1,97 +1,350 @@
-# TripVault 🗺️
+\# TripVault
+
+
 
 A travel memory journal where users can log trips, upload photos, and share memories.
 
-This is **Week 1** of the TripVault internship: project setup and JWT-based authentication.
 
-## Tech Stack
 
-- **Backend:** Node.js, Express, MongoDB (Mongoose), JWT, bcrypt
-- **Frontend:** React (Vite), React Router, Axios
+\## Week 1 - Project Setup and Authentication
 
-## Folder Structure
 
-```
-tripvault/
-├── client/          # React (Vite) frontend
-│   ├── src/
-│   │   ├── pages/       # Login.jsx, Register.jsx, Dashboard.jsx
-│   │   ├── components/  # ProtectedRoute.jsx
-│   │   ├── api.js       # Axios instance
-│   │   └── App.jsx
-├── server/          # Node + Express backend
-│   ├── models/       # User.js
-│   ├── routes/       # auth.js
-│   ├── middleware/   # authMiddleware.js
-│   ├── .env.example
-│   └── index.js
-└── README.md
-```
 
-## Setup Instructions
+This project implements the initial TripVault setup with JWT-based user authentication.
 
-### 1. Clone the repo
 
-```bash
-git clone https://github.com/<your-username>/tripvault.git
-cd tripvault
-```
 
-### 2. Backend setup
+\## Tech Stack
 
-```bash
+
+
+Backend:
+
+\- Node.js
+
+\- Express.js
+
+\- MongoDB Atlas
+
+\- Mongoose
+
+\- JWT
+
+\- bcrypt
+
+\- dotenv
+
+
+
+Frontend:
+
+\- React
+
+\- Vite
+
+\- React Router
+
+\- Axios
+
+
+
+\## Project Structure
+
+
+
+TripVault/
+
+|
+
+|-- client/
+
+|   |-- src/
+
+|   |   |-- components/
+
+|   |   |   `-- ProtectedRoute.jsx
+
+|   |   |-- pages/
+
+|   |   |   |-- Dashboard.jsx
+
+|   |   |   |-- Login.jsx
+
+|   |   |   `-- Register.jsx
+
+|   |   |-- api.js
+
+|   |   |-- App.jsx
+
+|   |   |-- index.css
+
+|   |   `-- main.jsx
+
+|   |-- package.json
+
+|   `-- package-lock.json
+
+|
+
+|-- server/
+
+|   |-- middleware/
+
+|   |   `-- authMiddleware.js
+
+|   |-- models/
+
+|   |   `-- User.js
+
+|   |-- routes/
+
+|   |   `-- auth.js
+
+|   |-- .env.example
+
+|   |-- .gitignore
+
+|   |-- index.js
+
+|   |-- package.json
+
+|   `-- package-lock.json
+
+|
+
+`-- README.md
+
+
+
+\## Features
+
+
+
+\- User registration
+
+\- Secure password hashing using bcrypt
+
+\- User login
+
+\- JWT-based authentication
+
+\- Protected user profile endpoint
+
+\- Protected dashboard
+
+\- Logout functionality
+
+\- MongoDB Atlas integration
+
+
+
+\## API Endpoints
+
+
+
+| Method | Endpoint | Description | Authentication |
+
+| POST | /api/auth/register | Register a new user | Not required |
+
+| POST | /api/auth/login | Login and receive JWT | Not required |
+
+| GET | /api/auth/me | Get logged-in user information | Bearer token required |
+
+
+
+\## Backend Setup
+
+
+
+\### 1. Clone the repository
+
+
+
+git clone https://github.com/suchismitadash-01/TripVault.git
+
+cd TripVault
+
+
+
+\### 2. Install backend dependencies
+
+
+
 cd server
+
 npm install
-cp .env.example .env
-```
 
-Edit `server/.env` and fill in:
 
-```
+
+\### 3. Configure environment variables
+
+
+
+Create a .env file inside the server directory.
+
+
+
 PORT=5000
-MONGO_URI=<your MongoDB Atlas connection string>
-JWT_SECRET=<any long random string>
-```
 
-Get a free MongoDB Atlas connection string at https://www.mongodb.com/cloud/atlas — create a free cluster, add a database user, allow your IP (or 0.0.0.0/0 for dev), and copy the connection string.
+MONGO\_URI=<your MongoDB Atlas connection string>
 
-Run the server:
+JWT\_SECRET=<your JWT secret>
 
-```bash
-npm run dev
-```
 
-Server runs at `http://localhost:5000`.
 
-### 3. Frontend setup
+The .env file contains sensitive credentials and must not be committed to GitHub.
+
+
+
+The .env.example file is included as a template.
+
+
+
+\### 4. Start the backend
+
+
+
+npm start
+
+
+
+The backend runs at:
+
+
+
+http://localhost:5000
+
+
+
+\## Frontend Setup
+
+
 
 Open a new terminal:
 
-```bash
+
+
 cd client
+
 npm install
+
 npm run dev
-```
 
-Frontend runs at `http://localhost:5173`.
 
-### 4. Try it out
 
-1. Go to `http://localhost:5173/register` and create an account
-2. Log in at `http://localhost:5173/login`
-3. You'll be redirected to `/dashboard`, which shows your name
-4. Try visiting `/dashboard` directly while logged out — you'll be redirected to `/login`
+The frontend runs at:
 
-## API Endpoints
 
-| Method | Route | Description | Auth Required |
-|--------|-------|-------------|----------------|
-| POST | `/api/auth/register` | Register a new user | No |
-| POST | `/api/auth/login` | Log in, returns JWT | No |
-| GET | `/api/auth/me` | Get logged-in user info | Yes (Bearer token) |
 
-## Security Notes
+http://localhost:5173
 
-- Passwords are hashed with bcrypt before being saved — never stored in plain text
-- JWT tokens expire after 7 days
-- `.env` is git-ignored and never committed
+
+
+\## Authentication Flow
+
+
+
+Register
+
+&#x20;  |
+
+&#x20;  v
+
+Login
+
+&#x20;  |
+
+&#x20;  v
+
+JWT Token
+
+&#x20;  |
+
+&#x20;  v
+
+Protected Dashboard
+
+&#x20;  |
+
+&#x20;  v
+
+Authenticated User
+
+
+
+Unauthenticated users cannot access the protected dashboard.
+
+
+
+\## Testing
+
+
+
+The APIs can be tested using Thunder Client, Postman, or another API testing tool.
+
+
+
+Register:
+
+
+
+POST http://localhost:5000/api/auth/register
+
+
+
+Login:
+
+
+
+POST http://localhost:5000/api/auth/login
+
+
+
+Get Current User:
+
+
+
+GET http://localhost:5000/api/auth/me
+
+
+
+For the /api/auth/me endpoint, use:
+
+
+
+Authorization: Bearer <your-jwt-token>
+
+
+
+\## Security
+
+
+
+\- Passwords are hashed using bcrypt before being stored.
+
+\- JWT is used for authentication.
+
+\- Protected routes require a valid Bearer token.
+
+\- Database credentials are stored in environment variables.
+
+\- The .env file is excluded from Git using .gitignore.
+
+\- Sensitive credentials must never be committed to GitHub.
+
+
+
+\## GitHub Repository
+
+
+
+https://github.com/suchismitadash-01/TripVault
+
+
+
+\## Week 1 Status
+
+
+
+Week 1 project setup and JWT-based authentication have been implemented and tested.
+
