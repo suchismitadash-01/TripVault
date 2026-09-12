@@ -5,16 +5,21 @@
 body {
   margin: 0;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  background-color: #f5f5f5;
+  background-color: #f5f7fb;
+  color: #1f2937;
 }
+
+/* =========================
+   AUTH PAGES
+========================= */
 
 .auth-container {
   max-width: 400px;
   margin: 80px auto;
   padding: 32px;
   background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
 .auth-container h2 {
@@ -30,7 +35,7 @@ body {
 .auth-container input {
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 5px;
   font-size: 14px;
 }
 
@@ -39,7 +44,7 @@ body {
   background-color: #2563eb;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   font-size: 14px;
   cursor: pointer;
 }
@@ -56,7 +61,7 @@ body {
 .error-message {
   color: #dc2626;
   font-size: 14px;
-  margin: 4px 0;
+  margin: 8px 0;
 }
 
 .auth-switch {
@@ -65,22 +70,186 @@ body {
   text-align: center;
 }
 
+/* =========================
+   DASHBOARD
+========================= */
+
 .dashboard-container {
-  max-width: 600px;
-  margin: 80px auto;
-  padding: 32px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  text-align: center;
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
 }
 
+/* Dashboard top section */
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.dashboard-header h2 {
+  margin: 0 0 8px;
+  font-size: 30px;
+  color: #111827;
+}
+
+.dashboard-header p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 16px;
+}
+
+/* Logout */
+
 .logout-button {
-  margin-top: 20px;
   padding: 10px 20px;
   background-color: #dc2626;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 14px;
+}
+
+.logout-button:hover {
+  background-color: #b91c1c;
+}
+
+/* =========================
+   MY TRIPS
+========================= */
+
+.trips-section {
+  margin-top: 30px;
+}
+
+.trips-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.trips-section-header h3 {
+  margin: 0;
+  font-size: 24px;
+  color: #111827;
+}
+
+/* Create Trip */
+
+.create-trip-button {
+  padding: 10px 18px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.create-trip-button:hover {
+  background-color: #1d4ed8;
+}
+
+/* =========================
+   TRIP CARDS
+========================= */
+
+.trip-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.trip-card {
+  padding: 22px;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.trip-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+}
+
+.trip-card h3 {
+  margin-top: 0;
+  margin-bottom: 18px;
+  font-size: 20px;
+  color: #111827;
+}
+
+.trip-card p {
+  margin: 10px 0;
+  color: #4b5563;
+  font-size: 14px;
+}
+
+.trip-card strong {
+  color: #1f2937;
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-state {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: #f9fafb;
+  border: 1px dashed #d1d5db;
+  border-radius: 10px;
+}
+
+.empty-state h3 {
+  margin-top: 0;
+  font-size: 22px;
+  color: #111827;
+}
+
+.empty-state p {
+  margin: 10px auto 0;
+  max-width: 550px;
+  color: #6b7280;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+  .dashboard-container {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .trips-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .create-trip-button {
+    width: 100%;
+  }
+
+  .logout-button {
+    width: 100%;
+  }
 }
