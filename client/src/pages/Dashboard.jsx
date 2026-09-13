@@ -83,7 +83,10 @@ export default function Dashboard() {
         <div className="trips-section-header">
           <h3>My Trips</h3>
 
-          <button className="create-trip-button">
+          <button 
+            className="create-trip-button"
+            onClick={() => navigate("/create-trip")}
+          >
             + Create Trip
           </button>
         </div>

@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
+import CreateTrip from "./pages/CreateTrip.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 export default function App() {
@@ -16,6 +17,14 @@ export default function App() {
           <ProtectedRoute>
             <Dashboard />
           </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/create-trip"
+      element={
+        <ProtectedRoute>
+          <CreateTrip />
+        </ProtectedRoute>
         }
       />
     </Routes>
