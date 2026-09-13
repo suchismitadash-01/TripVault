@@ -359,3 +359,37 @@ body {
     width: 100%;
   }
 }
+
+/* =========================
+   TRIP ACTION BUTTONS
+========================= */
+
+.edit-trip-button,
+.delete-trip-button {
+  padding: 9px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-right: 8px;
+}
+
+.edit-trip-button {
+  background-color: #2563eb;
+  color: white;
+}
+
+.edit-trip-button:hover {
+  background-color: #1d4ed8;
+}
+
+.delete-trip-button {
+  background-color: #dc2626;
+  color: white;
+}
+
+.delete-trip-button:hover {
+  background-color: #b91c1c;
+}

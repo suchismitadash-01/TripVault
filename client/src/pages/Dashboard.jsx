@@ -46,6 +46,39 @@ export default function Dashboard() {
     navigate("/login");
   }
 
+  async function handleDelete(tripId) {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this trip?"
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    try {
+      await api.delete(`/trips/${tripId}`);
+
+      // Remove the deleted trip from the current list
+      setTrips((currentTrips) =>
+        currentTrips.filter((trip) => trip._id !== tripId)
+      );
+    } catch (err) {
+      console.error("Delete trip error:", err);
+
+      if (err.response?.status === 401) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        navigate("/login");
+        return;
+      }
+
+      setError(
+        err.response?.data?.message ||
+          "Unable to delete trip. Please try again."
+      );
+    }
+  }
+
   function formatDate(date) {
     if (!date) return "Not specified";
 
@@ -127,6 +160,12 @@ export default function Dashboard() {
                   onClick={() => navigate(`/edit-trip/${trip._id}`)}
                 >
                   ✏️ Edit Trip
+                </button>
+                <button
+                  className="delete-trip-button"
+                  onClick={() => handleDelete(trip._id)}
+                >
+                  🗑️ Delete Trip
                 </button>
               </div>
             ))}
