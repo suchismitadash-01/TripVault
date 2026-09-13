@@ -3,6 +3,7 @@ import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import CreateTrip from "./pages/CreateTrip.jsx";
+import EditTrip from "./pages/EditTrip.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 export default function App() {
@@ -21,10 +22,18 @@ export default function App() {
       />
       <Route
         path="/create-trip"
-      element={
+        element={
         <ProtectedRoute>
           <CreateTrip />
         </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/edit-trip/:id"
+        element={
+          <ProtectedRoute>
+            <EditTrip />
+          </ProtectedRoute>
         }
       />
     </Routes>

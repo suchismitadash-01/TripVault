@@ -121,6 +121,13 @@ export default function Dashboard() {
                   <strong>⭐ Rating:</strong>{" "}
                   {trip.rating ? `${trip.rating}/5` : "Not rated"}
                 </p>
+
+                <button
+                  className="edit-trip-button"
+                  onClick={() => navigate(`/edit-trip/${trip._id}`)}
+                >
+                  ✏️ Edit Trip
+                </button>
               </div>
             ))}
           </div>
