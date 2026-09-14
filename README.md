@@ -348,3 +348,84 @@ https://github.com/suchismitadash-01/TripVault
 
 Week 1 project setup and JWT-based authentication have been implemented and tested.
 
+## Week 2 - Trip Management and CRUD Operations
+
+Week 2 focuses on implementing complete trip management functionality in TripVault.
+
+### Backend Trip Management
+
+The backend provides protected CRUD APIs for managing trips.
+
+Each trip contains:
+
+- Title
+- Destination
+- Start date
+- End date
+- Description
+- Rating
+- User ownership
+- Created and updated timestamps
+
+### Trip CRUD APIs
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/trips` | Create a new trip |
+| GET | `/api/trips` | Get all trips of the logged-in user |
+| GET | `/api/trips/:id` | Get a specific trip |
+| PUT | `/api/trips/:id` | Update a trip |
+| DELETE | `/api/trips/:id` | Delete a trip |
+
+All trip APIs are protected using JWT authentication.
+
+Users can access and manage only their own trips.
+
+### Frontend Trip Management
+
+The React frontend includes:
+
+- Trip dashboard
+- Trip cards
+- Create Trip form
+- Edit Trip form
+- Delete Trip functionality
+- Delete confirmation
+- Trip title and destination display
+- Start and end dates
+- Trip rating
+- Empty-state message
+- Loading state
+- Error handling
+- Automatic dashboard refresh after create, edit, and delete
+
+### Testing
+
+The Trip CRUD APIs were tested using Thunder Client.
+
+The following operations were successfully tested:
+
+- Create trip
+- Get all trips
+- Get a single trip
+- Update trip
+- Delete trip
+- Verify deleted trip returns `404`
+- Protected API access using JWT
+
+The frontend functionality was also tested for:
+
+- Create Trip
+- Edit Trip
+- Delete Trip
+- Delete confirmation
+- Automatic refresh
+- Loading state
+- Empty state
+- Error handling
+
+### Week 2 Status
+
+Week 2 Trip Management and CRUD Operations have been implemented and tested successfully.
+
+The project now supports complete authenticated trip management from the React frontend through the Node.js/Express backend and MongoDB database.
