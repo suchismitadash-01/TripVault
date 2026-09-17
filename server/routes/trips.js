@@ -1,6 +1,7 @@
 const express = require("express");
 const Trip = require("../models/Trip");
 const authMiddleware = require("../middleware/authMiddleware");
+const upload = require("../middleware/upload");
 
 const router = express.Router();
 
@@ -27,6 +28,49 @@ router.post("/", authMiddleware, async (req, res) => {
   } catch (error) {
     res.status(400).json({
       message: "Failed to create trip",
+      error: error.message,
+    });
+  }
+});
+
+// POST /api/trips/:id/upload
+// Upload a photo to Cloudinary and attach it to the trip
+router.post("/:id/upload", authMiddleware, upload.single("image"), async (req, res) => {
+  try {
+    const trip = await Trip.findOne({
+      _id: req.params.id,
+      user: req.userId,
+    });
+
+    if (!trip) {
+      return res.status(404).json({
+        message: "Trip not found",
+      });
+    }
+
+    if (!req.file) {
+      return res.status(400).json({
+        message: "Please upload an image",
+      });
+    }
+
+    const imageUrl = req.file.path;
+
+    trip.photos.push(imageUrl);
+
+    if (!trip.coverImage) {
+      trip.coverImage = imageUrl;
+    }
+
+    const updatedTrip = await trip.save();
+
+    res.status(200).json({
+      message: "Photo uploaded successfully",
+      trip: updatedTrip,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to upload photo",
       error: error.message,
     });
   }

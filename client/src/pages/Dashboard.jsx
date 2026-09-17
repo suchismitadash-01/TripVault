@@ -136,6 +136,14 @@ export default function Dashboard() {
           <div className="trip-grid">
             {trips.map((trip) => (
               <div className="trip-card" key={trip._id}>
+                {trip.coverImage && (
+                  <img
+                    src={trip.coverImage}
+                    alt={trip.title}
+                    className="trip-cover-image"
+                  />
+                )}
+            
                 <h3>{trip.title}</h3>
 
                 <p>

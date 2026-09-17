@@ -12,6 +12,7 @@ export default function CreateTrip() {
     endDate: "",
     description: "",
     rating: "",
+    photo: null,
   });
 
   const [loading, setLoading] = useState(false);
@@ -26,36 +27,47 @@ export default function CreateTrip() {
     });
   }
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+async function handleSubmit(e) {
+  e.preventDefault();
 
-    setError("");
-    setLoading(true);
+  setError("");
+  setLoading(true);
 
-    try {
-      await api.post("/trips", {
-        title: formData.title,
-        destination: formData.destination,
-        startDate: formData.startDate || undefined,
-        endDate: formData.endDate || undefined,
-        description: formData.description,
-        rating: formData.rating ? Number(formData.rating) : undefined,
-      });
+  try {
+    // Create the trip first
+    const response = await api.post("/trips", {
+      title: formData.title,
+      destination: formData.destination,
+      startDate: formData.startDate || undefined,
+      endDate: formData.endDate || undefined,
+      description: formData.description,
+      rating: formData.rating ? Number(formData.rating) : undefined,
+    });
 
-      // Return to dashboard after successful creation
-      navigate("/dashboard");
-    } catch (err) {
-      console.error("Create trip error:", err);
+    const createdTrip = response.data;
 
-      if (err.response?.data?.message) {
-        setError(err.response.data.message);
-      } else {
-        setError("Unable to create trip. Please try again.");
-      }
-    } finally {
-      setLoading(false);
+    // Upload photo if one was selected
+    if (formData.photo) {
+      const uploadData = new FormData();
+      uploadData.append("image", formData.photo);
+
+      await api.post(`/trips/${createdTrip._id}/upload`, uploadData);
     }
+
+    // Return to dashboard after successful creation
+    navigate("/dashboard");
+  } catch (err) {
+    console.error("Create trip error:", err);
+
+    if (err.response?.data?.message) {
+      setError(err.response.data.message);
+    } else {
+      setError("Unable to create trip. Please try again.");
+    }
+  } finally {
+    setLoading(false);
   }
+}
 
   return (
     <div className="form-container">
@@ -143,6 +155,21 @@ export default function CreateTrip() {
             <option value="5">5 ⭐⭐⭐⭐⭐</option>
           </select>
         </label>
+
+        <label>
+          Trip Photo
+          <input
+            type="file"
+            name="photo"
+            accept="image/jpeg,image/png,image/webp"
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                photo: e.target.files[0],
+              })
+            }
+          />
+        </label> 
 
         <button type="submit" className="submit-trip-button" disabled={loading}>
           {loading ? "Creating Trip..." : "Create Trip"}
