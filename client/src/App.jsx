@@ -4,6 +4,7 @@ import Register from "./pages/Register.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import CreateTrip from "./pages/CreateTrip.jsx";
 import EditTrip from "./pages/EditTrip.jsx";
+import TripDetails from "./pages/TripDetails.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 export default function App() {
@@ -33,6 +34,14 @@ export default function App() {
         element={
           <ProtectedRoute>
             <EditTrip />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/trip/:id"
+        element={
+          <ProtectedRoute>
+            <TripDetails />
           </ProtectedRoute>
         }
       />

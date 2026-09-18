@@ -164,11 +164,19 @@ export default function Dashboard() {
                 </p>
 
                 <button
+                  className="view-trip-button"
+                  onClick={() => navigate(`/trip/${trip._id}`)}
+                >
+                  👁️ View Details
+                </button>
+
+                <button
                   className="edit-trip-button"
                   onClick={() => navigate(`/edit-trip/${trip._id}`)}
                 >
                   ✏️ Edit Trip
                 </button>
+
                 <button
                   className="delete-trip-button"
                   onClick={() => handleDelete(trip._id)}
