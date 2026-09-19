@@ -15,19 +15,36 @@ function generateToken(userId) {
 // @desc    Register a new user
 router.post("/register", async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, username, email, password } = req.body;
 
-    if (!name || !email || !password) {
-      return res.status(400).json({ message: "Name, email, and password are all required" });
+    if (!name || !username || !email || !password) {
+      return res
+        .status(400)
+        .json({ message: "Name, username, email, and password are all required" });
     }
 
     if (password.length < 6) {
       return res.status(400).json({ message: "Password must be at least 6 characters" });
     }
 
-    const existingUser = await User.findOne({ email: email.toLowerCase() });
-    if (existingUser) {
-      return res.status(409).json({ message: "An account with this email already exists" });
+    const existingEmail = await User.findOne({
+      email: email.toLowerCase(),
+    });
+
+    if (existingEmail) {
+      return res
+        .status(409)
+        .json({ message: "An account with this email already exists" });
+    }
+
+    const existingUsername = await User.findOne({
+      username: username.toLowerCase(),
+    });
+
+    if (existingUsername) {
+      return res
+        .status(409)
+        .json({ message: "This username is already taken" });
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -35,13 +52,19 @@ router.post("/register", async (req, res) => {
 
     const user = await User.create({
       name,
+      username: username.toLowerCase(),
       email: email.toLowerCase(),
       password: hashedPassword,
     });
 
     return res.status(201).json({
       message: "User registered successfully",
-      user: { id: user._id, name: user.name, email: user.email },
+      user: { 
+        id: user._id, 
+        name: user.name, 
+        username: user.username,
+        email: user.email 
+      },
     });
   } catch (err) {
     console.error("Register error:", err.message);
