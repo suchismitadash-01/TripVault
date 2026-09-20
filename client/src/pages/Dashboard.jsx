@@ -105,9 +105,18 @@ export default function Dashboard() {
           <p>Your TripVault dashboard</p>
         </div>
 
-        <button className="logout-button" onClick={handleLogout}>
-          Log out
-        </button>
+        <div>
+          <button
+            className="view-profile-button"
+            onClick={() => navigate(`/profile/${user.username}`)}
+          >
+            👤 My Profile
+          </button>
+
+          <button className="logout-button" onClick={handleLogout}>
+            Log out
+          </button>
+        </div>
       </div>
 
       {error && <p className="error-message">{error}</p>}
