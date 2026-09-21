@@ -429,3 +429,86 @@ The frontend functionality was also tested for:
 Week 2 Trip Management and CRUD Operations have been implemented and tested successfully.
 
 The project now supports complete authenticated trip management from the React frontend through the Node.js/Express backend and MongoDB database.
+
+## Week 3 – Photo Uploads & Public Profiles
+
+Week 3 adds photo management and public traveller profiles to TripVault.
+
+### Features Added
+
+- Cloudinary integration for image uploads
+- Multer-based image upload handling
+- Trip cover images
+- Multiple photos for each trip
+- Trip details page with photo gallery
+- Public traveller profiles
+- Unique usernames
+- User bio
+- Public travel memories
+- Edit Profile functionality
+- Responsive profile and trip layouts
+
+### Photo Upload
+
+Trip photos are uploaded using Multer and stored on Cloudinary.
+
+Supported image formats:
+
+- JPG
+- JPEG
+- PNG
+- WebP
+
+Maximum file size:
+
+- 5 MB
+
+Cloudinary credentials are stored securely in the `.env` file and are not committed to GitHub.
+
+### Public Profiles
+
+Users have a public profile available at:
+
+`/profile/:username`
+
+The public profile displays:
+
+- Name
+- Username
+- Bio
+- Travel memories
+- Trip destination
+- Start and end dates
+- Rating
+- Cover image
+
+Private information such as email addresses and passwords is not exposed through the public profile API.
+
+### Profile Editing
+
+Logged-in users can update:
+
+- Username
+- Bio
+
+Profile updates are handled through the protected profile API.
+
+### Week 3 API Endpoints
+
+| Method | Endpoint | Access | Purpose |
+|---|---|---|---|
+| POST | `/api/trips/:id/upload` | Private | Upload a trip photo |
+| GET | `/api/users/:username/profile` | Public | View a public profile |
+| PUT | `/api/users/profile` | Private | Update username and bio |
+
+### Technologies Used
+
+- React
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- Cloudinary
+- Multer
+- Axios
+- JWT Authentication
