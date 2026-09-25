@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import api from "../api";
 
 export default function Dashboard() {
@@ -57,6 +58,7 @@ export default function Dashboard() {
 
     try {
       await api.delete(`/trips/${tripId}`);
+      toast.success("Trip deleted successfully!");
 
       // Remove the deleted trip from the current list
       setTrips((currentTrips) =>
@@ -72,10 +74,12 @@ export default function Dashboard() {
         return;
       }
 
-      setError(
+      const message =
         err.response?.data?.message ||
-          "Unable to delete trip. Please try again."
-      );
+        "Unable to delete trip. Please try again.";
+
+      setError(message);
+      toast.error(message);
     }
   }
 

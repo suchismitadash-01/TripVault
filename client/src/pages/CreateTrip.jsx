@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import api from "../api";
 
 export default function CreateTrip() {
@@ -54,16 +55,23 @@ async function handleSubmit(e) {
       await api.post(`/trips/${createdTrip._id}/upload`, uploadData);
     }
 
+    // Show success message
+    toast.success(
+      formData.photo
+        ? "Trip created and photo uploaded successfully!"
+        : "Trip created successfully!"
+    );
     // Return to dashboard after successful creation
     navigate("/dashboard");
   } catch (err) {
-    console.error("Create trip error:", err);
+  console.error("Create trip error:", err);
 
-    if (err.response?.data?.message) {
-      setError(err.response.data.message);
-    } else {
-      setError("Unable to create trip. Please try again.");
-    }
+  const message =
+    err.response?.data?.message ||
+    "Unable to create trip. Please try again.";
+
+  setError(message);
+  toast.error(message);
   } finally {
     setLoading(false);
   }

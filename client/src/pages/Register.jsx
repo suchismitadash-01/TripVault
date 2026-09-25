@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import api from "../api";
 
 export default function Register() {
@@ -25,6 +26,7 @@ export default function Register() {
 
     try {
       await api.post("/auth/register", formData);
+      toast.success("Registration successful! Please log in.");
 
       // After successful registration, send them to log in
       navigate("/login");
@@ -34,6 +36,7 @@ export default function Register() {
         "Registration failed. Please try again.";
 
       setError(message);
+      toast.error(message);
     } finally {
       setLoading(false);
     }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../api";
+import { toast } from "react-toastify";
 
 export default function EditTrip() {
   const { id } = useParams();
@@ -13,11 +14,13 @@ export default function EditTrip() {
     endDate: "",
     description: "",
     rating: "",
+    photo: null,
   });
 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const [currentPhoto, setCurrentPhoto] = useState("");
 
   // Load the existing trip
   useEffect(() => {
@@ -25,6 +28,7 @@ export default function EditTrip() {
       try {
         const response = await api.get(`/trips/${id}`);
         const trip = response.data;
+        setCurrentPhoto(trip.coverImage || "");
 
         setFormData({
           title: trip.title || "",
@@ -37,6 +41,7 @@ export default function EditTrip() {
             : "",
           description: trip.description || "",
           rating: trip.rating ? String(trip.rating) : "",
+          photo: null,
         });
       } catch (err) {
         console.error("Fetch trip error:", err);
@@ -85,19 +90,37 @@ export default function EditTrip() {
         rating: formData.rating ? Number(formData.rating) : undefined,
       });
 
-      navigate("/dashboard");
-    } catch (err) {
-      console.error("Update trip error:", err);
+    if (formData.photo) {
+      const photoData = new FormData();
+      photoData.append("image", formData.photo);
 
-      if (err.response?.data?.message) {
-        setError(err.response.data.message);
-      } else {
-        setError("Unable to update trip. Please try again.");
-      }
-    } finally {
-      setSaving(false);
+      await api.post(`/trips/${id}/upload`, photoData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
     }
+
+    toast.success(
+      formData.photo
+        ? "Trip updated and photo uploaded successfully!"
+        : "Trip updated successfully!"
+    );
+
+    navigate("/dashboard");
+  } catch (err) {
+    console.error("Update trip error:", err);
+
+    const message =
+      err.response?.data?.message ||
+      "Unable to update trip. Please try again.";
+
+    setError(message);
+    toast.error(message);
+  } finally {
+    setSaving(false);
   }
+}
 
   if (loading) {
     return (
@@ -209,6 +232,35 @@ export default function EditTrip() {
             <option value="4">4 ⭐⭐⭐⭐</option>
             <option value="5">5 ⭐⭐⭐⭐⭐</option>
           </select>
+        </label>
+
+        {currentPhoto && (
+          <div className="current-photo-section">
+            <p>Current Trip Photo</p>
+
+            <img
+            src={currentPhoto}
+            alt={formData.title}
+            className="edit-trip-photo"
+            />
+          </div>
+        )}
+
+        <label>
+          Replace Trip Photo
+          <input
+            type="file"
+            name="photo"
+            accept="image/jpeg,image/png,image/webp"
+            onChange={(e) => {
+              const file = e.target.files[0] || null;
+
+              setFormData({
+                ...formData,
+                photo: file,
+              });
+            }}
+          />
         </label>
 
         <button

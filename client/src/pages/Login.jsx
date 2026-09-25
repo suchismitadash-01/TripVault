@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import api from "../api";
 
 export default function Login() {
@@ -22,10 +23,12 @@ export default function Login() {
       // Store JWT so ProtectedRoute and future requests can use it
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
+      toast.success("Login successful!");
       navigate("/dashboard");
     } catch (err) {
       const message = err.response?.data?.message || "Login failed. Please try again.";
       setError(message);
+      toast.error(message);
     } finally {
       setLoading(false);
     }

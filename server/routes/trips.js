@@ -57,10 +57,7 @@ router.post("/:id/upload", authMiddleware, upload.single("image"), async (req, r
     const imageUrl = req.file.path;
 
     trip.photos.push(imageUrl);
-
-    if (!trip.coverImage) {
-      trip.coverImage = imageUrl;
-    }
+    trip.coverImage = imageUrl; 
 
     const updatedTrip = await trip.save();
 

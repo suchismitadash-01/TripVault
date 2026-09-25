@@ -1,3 +1,5 @@
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
@@ -11,6 +13,8 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 export default function App() {
   return (
+    <>
+      <ToastContainer position="top-right" autoClose={3000} />
     <Routes>
       <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="/login" element={<Login />} />
@@ -60,5 +64,6 @@ export default function App() {
         }
       />
     </Routes>
+    </>
   );
 }
