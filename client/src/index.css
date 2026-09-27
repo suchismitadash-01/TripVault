@@ -261,6 +261,10 @@ body {
   .logout-button {
     width: 100%;
   }
+
+    .trip-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* =========================
@@ -662,4 +666,153 @@ body {
 
 .edit-profile-button:hover {
   background-color: #1d4ed8;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+  width: 100%;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-logo {
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 700;
+  color: #1d4ed8;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: #374151;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.navbar-links a:hover {
+  color: #1d4ed8;
+}
+
+.navbar-logout {
+  border: none;
+  padding: 9px 16px;
+  border-radius: 6px;
+  background-color: #dc2626;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.navbar-logout:hover {
+  background-color: #b91c1c;
+}
+
+.hamburger-button {
+  display: none;
+  border: none;
+  background: transparent;
+  font-size: 28px;
+  cursor: pointer;
+  color: #1f2937;
+}
+
+/* Mobile Navbar */
+
+@media (max-width: 700px) {
+  .navbar-container {
+    padding: 12px 18px;
+  }
+
+  .navbar-logo {
+    font-size: 22px;
+  }
+
+  .hamburger-button {
+    display: block;
+  }
+
+  .navbar-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 16px 20px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    border-bottom: 1px solid #e5e7eb;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  }
+
+  .navbar-links.open {
+    display: flex;
+  }
+
+  .navbar-links a {
+    padding: 10px;
+  }
+
+  .navbar-logout {
+    width: 100%;
+  }
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+  margin-top: 40px;
+  padding: 20px 24px;
+  background-color: #f9fafb;
+  border-top: 1px solid #e5e7eb;
+  text-align: center;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.footer p {
+  margin: 0 0 8px;
+}
+
+.footer a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 700px) {
+  .footer {
+    padding: 18px;
+    font-size: 13px;
+  }
 }

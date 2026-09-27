@@ -10,60 +10,64 @@ import TripDetails from "./pages/TripDetails.jsx";
 import PublicProfile from "./pages/PublicProfile.jsx";
 import EditProfile from "./pages/EditProfile.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import Navbar from "./components/Navbar.jsx";
+import Footer from "./components/Footer.jsx";
 
 export default function App() {
   return (
     <>
       <ToastContainer position="top-right" autoClose={3000} />
-    <Routes>
-      <Route path="/" element={<Navigate to="/login" replace />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route
-        path="/dashboard"
-        element={
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/create-trip"
+          element={
           <ProtectedRoute>
-            <Dashboard />
+            <CreateTrip />
           </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/create-trip"
-        element={
-        <ProtectedRoute>
-          <CreateTrip />
-        </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/edit-trip/:id"
-        element={
-          <ProtectedRoute>
-            <EditTrip />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/trip/:id"
-        element={
-          <ProtectedRoute>
-            <TripDetails />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/profile/:username"
-        element={<PublicProfile />}
-      />
-      <Route
-        path="/edit-profile"
-        element={
-          <ProtectedRoute>
-            <EditProfile />
-          </ProtectedRoute>
-        }
-      />
-    </Routes>
+          }
+        />
+        <Route
+          path="/edit-trip/:id"
+          element={
+            <ProtectedRoute>
+              <EditTrip />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/trip/:id"
+          element={
+            <ProtectedRoute>
+              <TripDetails />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile/:username"
+          element={<PublicProfile />}
+        />
+        <Route
+          path="/edit-profile"
+          element={
+            <ProtectedRoute>
+              <EditProfile />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+      <Footer />
     </>
   );
 }
