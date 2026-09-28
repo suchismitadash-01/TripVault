@@ -61,6 +61,16 @@ export default function PublicProfile() {
           @{profile.username}
         </p>
 
+        <button
+          className="edit-profile-button"
+          onClick={() => {
+            navigator.clipboard.writeText(window.location.href);
+            alert("Public profile link copied!");
+          }}
+        >
+  🔗 Copy Profile Link
+</button>
+
         <Link to="/edit-profile" className="edit-profile-button">
           ✏️ Edit Profile
         </Link>
