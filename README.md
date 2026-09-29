@@ -512,3 +512,71 @@ Profile updates are handled through the protected profile API.
 - Multer
 - Axios
 - JWT Authentication
+
+## Week 4 – UI Polish, Responsive Design & Deployment
+
+TripVault is now a fully deployed full-stack MERN application with a responsive user interface.
+
+### Live Demo
+
+https://trip-vault-ten.vercel.app/
+
+### Backend
+
+https://tripvault-8qhj.onrender.com/
+
+### Week 4 Features
+
+- Responsive design for desktop, tablet, and mobile screens
+- Responsive hamburger navigation menu
+- Loading states
+- User-friendly error messages
+- Toast notifications for important actions
+- Empty states
+- Consistent styling across the application
+- Responsive trip cards and photo galleries
+- Navbar and footer
+- JWT authentication
+- Trip CRUD operations
+- Cloudinary photo uploads
+- Public traveller profiles
+- Shareable public profile links
+- Production deployment
+
+### Tech Stack
+
+- React
+- Vite
+- Node.js
+- Express.js
+- MongoDB Atlas
+- Mongoose
+- JWT
+- bcrypt
+- Axios
+- Cloudinary
+- Multer
+- Render
+- Vercel
+
+### Production Environment
+
+The frontend is deployed on Vercel and connects to the backend deployed on Render.
+
+Environment variables are configured through the deployment platforms and sensitive credentials are not committed to GitHub.
+
+### Local Development
+
+#### Backend
+
+```bash
+cd server
+npm install
+npm start
+
+#### Frontend
+
+```bash
+cd client
+npm install
+npm run dev
