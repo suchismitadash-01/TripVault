@@ -4,7 +4,9 @@
 
 A travel memory journal where users can log trips, upload photos, and share memories.
 
+## Screenshot
 
+![TripVault Dashboard](client/tripvault-screenshot.png)
 
 \## Week 1 - Project Setup and Authentication
 
